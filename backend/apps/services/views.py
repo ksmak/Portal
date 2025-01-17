@@ -9,4 +9,4 @@ class ServiceView(viewsets.ReadOnlyModelViewSet):
 
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]

@@ -21,11 +21,14 @@ class ServiceSerializerTest(TestCase):
             "name": "тестовый сервис",
             "category": 1,
             "image": ANY,
+            "target": "https://example.com"
         }
 
         service = Service.objects.create(
+            order_num=1,
             name="тестовый сервис",
             category=1,
+            target="https://example.com"
         )
         with tempfile.TemporaryFile() as fp:
             service.image = SimpleUploadedFile(
@@ -45,8 +48,10 @@ class ServiceViewTest(test.APITestCase):
 
     def setUp(self):
         self.service1 = Service.objects.create(
+            order_num=1,
             name="тестовый сервис 1",
             category=1,
+            target="https://example1.com"
         )
 
         with tempfile.TemporaryFile() as fp:
@@ -58,8 +63,10 @@ class ServiceViewTest(test.APITestCase):
             self.service1.save()
 
         self.service2 = Service.objects.create(
+            order_num=1,
             name="тестовый сервис 2",
             category=2,
+            target="https://example2.com"
         )
 
         with tempfile.TemporaryFile() as fp:
@@ -70,23 +77,21 @@ class ServiceViewTest(test.APITestCase):
             )
             self.service2.save()
 
-        self.user = User.objects.create(email="testuser1@mail.ru", password="12345")
-
-    def test_service_view_with_auth(self):
-        self.client.force_authenticate(user=self.user)
-
+    def test_service_view(self):
         expected_data = [
             {
                 "id": ANY,
                 "name": "тестовый сервис 1",
                 "category": 1,
                 "image": ANY,
+                "target": "https://example1.com",
             },
             {
                 "id": ANY,
                 "name": "тестовый сервис 2",
                 "category": 2,
                 "image": ANY,
+                "target": "https://example2.com",
             },
         ]
 
@@ -94,13 +99,6 @@ class ServiceViewTest(test.APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertListEqual(expected_data, response.data)
-
-    def test_service_view_without_auth(self):
-        self.client.force_authenticate(user=None)
-
-        response = self.client.get("/api/services/")
-
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def tearDown(self):
         shutil.rmtree("media/")
