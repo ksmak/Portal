@@ -10,6 +10,7 @@ from django.contrib.auth.models import (
 class Department(models.Model):
     """Department model."""
 
+    order_num = models.PositiveIntegerField(verbose_name="порядковый номер", default=1)
     name_ru = models.CharField(
         verbose_name="наименование (на русском языке)", max_length=250
     )
@@ -21,6 +22,7 @@ class Department(models.Model):
         return self.name_ru
 
     class Meta:
+        ordering = ["order_num"]
         verbose_name = "подразделение"
         verbose_name_plural = "подразделения"
 
@@ -28,6 +30,7 @@ class Department(models.Model):
 class Management(models.Model):
     """Management model."""
 
+    order_num = models.PositiveIntegerField(verbose_name="порядковый номер", default=1)
     name_ru = models.CharField(
         verbose_name="наименование (на русском языке)", max_length=250
     )
@@ -39,8 +42,29 @@ class Management(models.Model):
         return self.name_ru
 
     class Meta:
+        ordering = ["order_num"]
         verbose_name = "служба"
         verbose_name_plural = "службы"
+
+
+class Division(models.Model):
+    """Division model."""
+
+    order_num = models.PositiveIntegerField(verbose_name="порядковый номер", default=1)
+    name_ru = models.CharField(
+        verbose_name="наименование (на русском языке)", max_length=250
+    )
+    name_kk = models.CharField(
+        verbose_name="наименование (на казахском языке)", max_length=250
+    )
+
+    def __str__(self):
+        return self.name_ru
+
+    class Meta:
+        ordering = ["order_num"]
+        verbose_name = "отдел(группа)"
+        verbose_name_plural = "отделы(группы)"
 
 
 class CustomUserManager(BaseUserManager):
@@ -104,12 +128,23 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null=True,
     )
+    division = models.ForeignKey(
+        verbose_name="отдел/группа",
+        to=Division,
+        on_delete=models.RESTRICT,
+        max_length=200,
+        blank=True,
+        null=True,
+    )
     rank = models.IntegerField(
         verbose_name="звание", choices=RANKS, blank=True, null=True
     )
     job = models.CharField(verbose_name="должность", max_length=250)
     date_of_birth = models.DateField(
         verbose_name="дата рождения", blank=True, null=True
+    )
+    phone = models.CharField(
+        verbose_name="рабочий телефон", max_length=50, blank=True, null=True
     )
     is_active = models.BooleanField(verbose_name="активность", default=True)
     is_superuser = models.BooleanField(verbose_name="администратор", default=False)
@@ -130,6 +165,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return f"{self.last_name} {self.first_name} {self.middle_name}".strip().lower()
 
     class Meta:
-        ordering = ["email", "last_name", "first_name", "last_name"]
+        ordering = ["last_name", "first_name", "last_name"]
         verbose_name = "пользователь"
         verbose_name_plural = "пользователи"

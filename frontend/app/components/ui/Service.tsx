@@ -10,10 +10,10 @@ export default function Service({
     return (
         <Link
             href={service.target}
-            target="_blank"
+        // target="_blank"
         >
             <Card
-                className="max-w-sm p-2 h-20 shadow-blue-200"
+                className="max-w-sm p-2 h-24 shadow-blue-200"
                 renderImage={() => <img width={75} height={50} src={service.image} alt="logo" />}
                 horizontal>
                 <div

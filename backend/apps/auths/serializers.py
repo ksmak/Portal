@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .models import Department, Management, Division
 
 User = get_user_model()
 
@@ -31,7 +32,42 @@ class CustomUserSerializer(serializers.ModelSerializer):
             "middle_name",
             "department",
             "management",
+            "division",
             "rank",
             "job",
             "date_of_birth",
+            "phone",
+        ]
+
+
+class DepartmentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Department
+        fields = [
+            "id",
+            "name_kk",
+            "name_ru",
+        ]
+
+
+class ManagementSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Management
+        fields = [
+            "id",
+            "name_kk",
+            "name_ru",
+        ]
+
+
+class DivisionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Division
+        fields = [
+            "id",
+            "name_kk",
+            "name_ru",
         ]
