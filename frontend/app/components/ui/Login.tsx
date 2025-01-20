@@ -1,6 +1,8 @@
+'use client'
+
 import React from "react";
 import { useForm } from "react-hook-form";
-import { AuthActions } from "@/app/auth/utils";
+import { AuthActions } from "@/app/components/lib/utils";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 

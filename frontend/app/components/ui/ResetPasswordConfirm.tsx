@@ -1,6 +1,8 @@
+'use client'
+
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { AuthActions } from "@/app/auth/utils";
+import { AuthActions } from "@/app/components/lib/utils";
 import { useSearchParams, useRouter } from "next/navigation";
 type FormData = {
     password: string;

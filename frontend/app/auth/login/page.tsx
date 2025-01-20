@@ -2,7 +2,7 @@
 
 import Login from "@/app/components/ui/Login";
 
-export default function LoginPage() {
+export default function Page() {
     return (
         <main>
             <Login />

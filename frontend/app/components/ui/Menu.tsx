@@ -4,7 +4,7 @@ import { MegaMenu, Navbar, Dropdown } from 'flowbite-react';
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import { fetcher } from "@/app/fetcher";
-import { AuthActions } from "@/app/auth/utils";
+import { AuthActions } from "@/app/components/lib/utils";
 import Link from 'next/link';
 
 export default function Menu() {

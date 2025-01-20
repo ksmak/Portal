@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import { ServiceType } from "../lib/definitions"
 import { Card } from "flowbite-react";

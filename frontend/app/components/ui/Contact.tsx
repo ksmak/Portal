@@ -1,3 +1,5 @@
+'use client'
+
 import { UserType } from "../lib/definitions"
 
 export default function Contact({

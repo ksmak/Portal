@@ -1,3 +1,5 @@
+'use client'
+
 import { Datepicker, Card } from "flowbite-react";
 
 export default function RightPanel() {
