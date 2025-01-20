@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, MegaMenu, Navbar, Dropdown } from 'flowbite-react';
+import { MegaMenu, Navbar, Dropdown } from 'flowbite-react';
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import { fetcher } from "@/app/fetcher";

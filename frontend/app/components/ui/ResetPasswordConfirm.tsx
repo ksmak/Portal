@@ -39,7 +39,7 @@ const ResetPasswordConfirmation = () => {
             ).res();
             alert("Password has been reset successfully.");
             router.push("/");
-        } catch (err) {
+        } catch {
             alert("Failed to reset password. Please try again.");
         }
     };

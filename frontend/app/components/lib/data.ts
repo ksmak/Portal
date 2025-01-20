@@ -1,17 +1,6 @@
-import { DictType, ServiceType, SignInType } from "./definitions";
+import { DictType, ServiceType } from "./definitions";
 
 const api_host = process.env.API_HOST;
-
-export async function signIn(email: string, password: string) {
-  const response = await fetch(`${api_host}/api/token`);
-  if (response.ok) {
-    if (response.status === 200) {
-      return (await response.json()) as SignInType;
-    }
-  }
-
-  return null;
-}
 
 export async function getServices() {
   const response = await fetch(`${api_host}/api/services/`);

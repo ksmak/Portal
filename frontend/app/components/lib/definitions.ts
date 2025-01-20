@@ -11,11 +11,6 @@ export type CredentialsType = {
   password: string;
 };
 
-export type SignInType = {
-  access: string;
-  refresh: string;
-};
-
 export type DictType = {
   id: number;
   name_kk: string;

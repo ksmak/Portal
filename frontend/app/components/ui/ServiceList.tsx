@@ -1,7 +1,6 @@
 'use client'
 
 import { Tabs } from "flowbite-react";
-import { MdDashboard } from "react-icons/md";
 import { ServiceType } from "../lib/definitions";
 import Service from "./Service";
 

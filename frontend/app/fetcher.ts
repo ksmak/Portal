@@ -29,7 +29,7 @@ const api = () => {
               removeTokens();
             })
             .json();
-        } catch (err) {
+        } catch {
           // window.location.replace("/");
           removeTokens();
         }
