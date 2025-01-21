@@ -16,7 +16,7 @@ export default function ServiceList({
                 className=""
                 active title="Основные сервисы МВД и ГП РК"
             >
-                <div className="grid lg:grid-cols-3 gap-4 flex-wrap">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap">
                     {services.filter(item => item.category === 1).map(item => (
                         <Service key={item.id} service={item} />
                     ))}

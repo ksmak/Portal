@@ -8,10 +8,10 @@ export default async function Page() {
 
   return (
     <div className="mt-10 flex justify-between">
-      <div>
+      <div className="w-full">
         <ServiceList services={services} />
       </div>
-      <div className="basis-1/3 flex flex-col items-center">
+      <div className="w-1/4 flex flex-col items-center">
         <RightPanel />
       </div>
     </div>
