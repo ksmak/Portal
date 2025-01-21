@@ -32,7 +32,7 @@ const Login = () => {
                 router.push("/");
             })
             .catch((err) => {
-                setError("root", { type: "manual", message: err.json.detail });
+                setError("root", { type: "manual", message: "error" });
             });
     };
 
@@ -75,7 +75,7 @@ const Login = () => {
                         </button>
                     </div>
                     {errors.root && (
-                        <span className="text-xs text-red-600">{errors.root.message}</span>
+                        <span className="text-xs text-red-600">"Ошибка! Неверный логин или пароль."</span>
                     )}
                 </form>
                 <div className="mt-6 text-center">

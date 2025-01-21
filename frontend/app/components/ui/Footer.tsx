@@ -13,8 +13,9 @@ export default function FooterComponent() {
                     <div>
                         <Footer.Title title="Программное обеспечение" />
                         {isOpen && <Footer.LinkGroup col>
-                            <Footer.Link href="#">NCALayer</Footer.Link>
-                            <Footer.Link href="#">CryptoSocket</Footer.Link>
+                            <Footer.Link href="http://192.168.10.100/ibdrqs/files/NCALayerInstall_x64.exe">NCALayer(64 бит)</Footer.Link>
+                            <Footer.Link href="http://192.168.10.100/ibdrqs/files/NCALayerInstall_x86.exe">NCALayer(32 бит)</Footer.Link>
+                            <Footer.Link href="http://10.61.209.47:8888/erdr/CryptoSocket/SetupCryptoSocket.zip">CryptoSocket</Footer.Link>
                         </Footer.LinkGroup>}
                     </div>
                     <div>
