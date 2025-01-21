@@ -7,6 +7,17 @@ const nextConfig: NextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '10.145.104.32',
+        port: '8000',
+        pathname: '/media/**',
+        search: '',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

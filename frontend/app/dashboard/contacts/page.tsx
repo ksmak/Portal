@@ -7,7 +7,7 @@ export default async function Page() {
     const managements = await getManagements() as DictType[]
     const divisions = await getDivisions() as DictType[]
     return (
-        <div>
+        <div className="container mx-auto">
             <ContactList
                 deparments={deparments}
                 managements={managements}
