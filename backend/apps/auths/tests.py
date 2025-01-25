@@ -83,7 +83,7 @@ class ServiceSerializerTest(TestCase):
         self.user.division = self.division
         self.user.rank = User.RANKS[0][0]
         self.user.job = "техник ИАГ"
-        self.user.date_of_birth = date(2000, 1, 1)
+        self.user.date_of_birth = date.today().isoformat()
         self.user.phone = "11-11-11"
         self.user.save()
 
@@ -98,7 +98,7 @@ class ServiceSerializerTest(TestCase):
             "division": self.division.id,
             "rank": User.RANKS[0][0],
             "job": "техник ИАГ",
-            "date_of_birth": "2000-01-01",
+            "date_of_birth": date.today().isoformat(),
             "phone": "11-11-11",
         }
 
@@ -111,7 +111,7 @@ class ServiceSerializerTest(TestCase):
             "last_name": "Ахметов",
             "first_name": "Ахмет",
             "middle_name": "Ахметович",
-            "date_of_birth": "2000-01-01",
+            "date_of_birth": date.today().isoformat(),
         }
 
         serializer = BirthUserSerializer(self.user)
@@ -140,7 +140,7 @@ class UserViewTest(test.APITestCase):
         self.user1.division = self.division
         self.user1.rank = User.RANKS[0][0]
         self.user1.job = "техник ИАГ"
-        self.user1.date_of_birth = date(2000, 1, 1)
+        self.user1.date_of_birth = date.today()
         self.user1.phone = "11-11-11"
         self.user1.save()
 
@@ -158,7 +158,7 @@ class UserViewTest(test.APITestCase):
                 "division": self.division.id,
                 "rank": User.RANKS[0][0],
                 "job": "техник ИАГ",
-                "date_of_birth": "2000-01-01",
+                "date_of_birth": date.today().isoformat(),
                 "phone": "11-11-11",
             }
         ]
@@ -181,26 +181,43 @@ class UserViewTest(test.APITestCase):
                 "last_name": "Ахметов",
                 "first_name": "Ахмет",
                 "middle_name": "Ахметович",
-                "date_of_birth": "2000-01-01",
+                "date_of_birth": date.today().isoformat(),
             }
         ]
 
-        response = self.client.get("api/birth_users/?q=today")
+        response = self.client.get("/api/birth_users/?q=today")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertListEqual(expected_data, response.data)
 
     def test_month_birth_user_view(self):
+        list_of_months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ]
+
         expected_data = [
             {
                 "last_name": "Ахметов",
                 "first_name": "Ахмет",
                 "middle_name": "Ахметович",
-                "date_of_birth": "2000-01-01",
+                "date_of_birth": date.today().isoformat(),
             }
         ]
 
-        response = self.client.get("api/birth_users/?q=january")
+        response = self.client.get(
+            f"/api/birth_users/?q={list_of_months[date.today().month]}"
+        )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertListEqual(expected_data, response.data)

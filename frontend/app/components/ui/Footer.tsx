@@ -7,7 +7,7 @@ export default function FooterComponent() {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <Footer className="hover:cursor-pointer" container onClick={() => setIsOpen(!isOpen)}>
+        <Footer className="hover:cursor-pointer bg-gray-50 p-1" container onClick={() => setIsOpen(!isOpen)}>
             <div className="w-full">
                 <div className="w-full grid grid-cols-2 justify-items-center">
                     <div>
@@ -30,7 +30,7 @@ export default function FooterComponent() {
                     </div>
                 </div>
                 {/* <Footer.Divider /> */}
-                <Footer.Copyright href="#" by="Департамент полиции Карагандинской области" year={2025} />
+                {/* <Footer.Copyright href="#" by="Департамент полиции Карагандинской области" year={2025} /> */}
             </div>
         </Footer>
     )

@@ -8,8 +8,8 @@ export default function Quote({
 }) {
     return (
         <div className="mt-4 self-end px-10 text-primary text-end italic font-normal text-lg">
-            <div>" {text} "</div>
-            <div>{author}</div>
+            {text && <div>" {text} "</div>}
+            {author && <div>{author}</div>}
         </div>
     )
 }

@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import views
@@ -15,6 +16,7 @@ from .serializers import (
     DepartmentSerializer,
     ManagementSerializer,
     DivisionSerializer,
+    BirthUserSerializer,
 )
 
 User = get_user_model()
@@ -71,3 +73,38 @@ class DivisionView(viewsets.ReadOnlyModelViewSet):
     queryset = Division.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = DivisionSerializer
+
+
+class BirthUserView(viewsets.ReadOnlyModelViewSet):
+    """birthday user view."""
+
+    permission_classes = [permissions.AllowAny]
+    serializer_class = BirthUserSerializer
+
+    list_of_months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ]
+
+    def get_queryset(self):
+        q = self.request.GET.get("q")
+
+        if q == "today":
+            return User.objects.filter(date_of_birth=date.today())
+
+        elif q in self.list_of_months:
+            return User.objects.filter(
+                date_of_birth__month=self.list_of_months.index(q)
+            )
+
+        return []

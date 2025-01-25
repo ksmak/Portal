@@ -4,12 +4,12 @@ import { Tabs } from "flowbite-react";
 import { ServiceType } from "../lib/definitions";
 import Service from "./Service";
 import { CustomFlowbiteTheme } from "flowbite-react";
+import useSWR from "swr";
+import { fetcher_no_auth } from "@/app/fetcher";
 
-export default function ServiceList({
-    services
-}: {
-    services: ServiceType[]
-}) {
+export default function ServiceList() {
+    const { data: services } = useSWR("/api/services/", fetcher_no_auth);
+
     const themeTabs: CustomFlowbiteTheme["tabs"] = {
         "tablist": {
             "tabitem": {
@@ -24,41 +24,35 @@ export default function ServiceList({
             }
         }
     }
+    const categories = [
+        {
+            id: 1,
+            title: "Основные сервисы МВД и ГП РК"
+        },
+        {
+            id: 2,
+            title: "Сервисы ДП Карагандинской области"
+        },
+        {
+            id: 3,
+            title: "Сервисы других государственных органов"
+        }
+    ]
     return (
         <Tabs theme={themeTabs} aria-label="Default tabs" variant="default" className="self-center">
-            <Tabs.Item
-                key={1}
-                className=""
-                active title="Основные сервисы МВД и ГП РК"
-            >
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap">
-                    {services.filter(item => item.category === 1).map(item => (
-                        <Service key={item.id} service={item} />
-                    ))}
-                </div>
-            </Tabs.Item>
-            <Tabs.Item
-                key={2}
-                className=""
-                active title="Сервисы ДП Карагандинской области"
-            >
-                <div className="grid lg:grid-cols-3 gap-3 flex-wrap">
-                    {services.filter(item => item.category === 2).map(item => (
-                        <Service key={item.id} service={item} />
-                    ))}
-                </div>
-            </Tabs.Item>
-            <Tabs.Item
-                key={3}
-                className=""
-                title="Сервисы других государственных органов"
-            >
-                <div className="grid lg:grid-cols-3 gap-3 flex-wrap">
-                    {services.filter(item => item.category === 3).map(item => (
-                        <Service key={item.id} service={item} />
-                    ))}
-                </div>
-            </Tabs.Item>
+            {categories.map(category => (
+                <Tabs.Item
+                    key={category.id}
+                    className=""
+                    title={category.title}
+                >
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap">
+                        {services?.filter((item: ServiceType) => item.category === category.id).map((item: ServiceType) => (
+                            <Service key={item.id} service={item} />
+                        ))}
+                    </div>
+                </Tabs.Item>
+            ))}
         </Tabs>
     );
 }

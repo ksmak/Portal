@@ -12,7 +12,7 @@ import { HiCog } from "react-icons/hi";
 import Language from './Language';
 
 export default function Menu() {
-    const t = useTranslations('HomePage');
+    const t = useTranslations('Menu');
 
     const SITE_NAME = "Информационный портал Департамента полиции Карагандинской области"
 
@@ -26,12 +26,13 @@ export default function Menu() {
         logout()
             .res(() => {
                 removeTokens();
-
                 router.push("/");
+                window.location.reload()
             })
             .catch(() => {
                 removeTokens();
                 router.push("/");
+                window.location.reload()
             });
     };
 
@@ -41,7 +42,7 @@ export default function Menu() {
                 <div className="w-full bg-primary flex flex-wrap items-center justify-between p-2 pl-10 m-0">
                     <Navbar.Brand href="/">
                         <Image width={90} height={70} alt="logo" src="/logo.png" />
-                        <span className="pl-5 self-center whitespace-nowrap text-xl font-semibold text-white">{SITE_NAME}</span>
+                        <span className="pl-5 self-center whitespace-nowrap text-xl font-semibold text-white">{t('site_name')}</span>
                     </Navbar.Brand>
                     <div className="order-2 hidden items-center gap-4 md:flex pr-5">
                         <Dropdown label="" dismissOnClick={false} renderTrigger={() => <div className='flex gap-2 items-center'><span className='text-white p-2 text-sm hover:cursor-pointer'>{user?.email}</span><HiCog className='w-5 h-5 text-white' /></div>}>

@@ -3,7 +3,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { AuthActions } from "@/app/components/lib/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 type FormData = {
@@ -12,6 +12,10 @@ type FormData = {
 };
 
 const Login = () => {
+    const searchParams = useSearchParams();
+
+    const pathname = searchParams.get('pathname') || '/'
+
     const {
         register,
         handleSubmit,
@@ -28,17 +32,16 @@ const Login = () => {
             .json((json) => {
                 storeToken(json.access, "access");
                 storeToken(json.refresh, "refresh");
-
-                router.push("/");
+                router.replace(pathname);
             })
             .catch((err) => {
-                setError("root", { type: "manual", message: "error" });
+                setError("root", { type: "manual", message: "Ошибка! Неверный логин или пароль." });
             });
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg w-1/3">
+        <div className="flex justify-center rounded-md">
+            <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg shadow-blue-200 w-1/3">
                 <h3 className="text-2xl font-semibold">Войти в систему</h3>
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
                     <div>
@@ -46,37 +49,33 @@ const Login = () => {
                             Email
                         </label>
                         <input
+                            className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                             type="text"
                             placeholder="Email"
-                            {...register("email", { required: true })}
-                            className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                            {...register("email", { required: "Email не должен быть пустым" })}
                         />
-                        {errors.email && (
-                            <span className="text-xs text-red-600">Email не должен быть пустым</span>
-                        )}
+                        <div className="mt-1 text-sm text-red-600">{errors.email?.message}</div>
                     </div>
                     <div className="mt-4">
                         <label className="block" htmlFor="password">
                             Пароль
                         </label>
                         <input
-                            type="password"
-                            placeholder="Password"
-                            {...register("password", { required: true })}
                             className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                            type="password"
+                            placeholder="Пароль"
+                            {...register("password", { required: "Пароль не должен быть пустым" })}
                         />
-                        {errors.password && (
-                            <span className="text-xs text-red-600">Пароль не должен быть пустым</span>
-                        )}
+                        <div className="mt-1 text-sm text-red-600">{errors.password?.message}</div>
                     </div>
-                    <div className="flex items-center justify-between mt-4">
-                        <button className="px-12 py-2 leading-5 text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">
+                    <div className="w-full text-center mt-4">
+                        <button
+                            className="px-12 py-2 leading-5 text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700 hover:cursor-pointer"
+                            type="submit">
                             Войти
                         </button>
+                        <div className="mt-3 text-sm text-red-600">{errors.root?.message}</div>
                     </div>
-                    {errors.root && (
-                        <span className="text-xs text-red-600">"Ошибка! Неверный логин или пароль."</span>
-                    )}
                 </form>
                 <div className="mt-6 text-center">
                     <Link
@@ -86,8 +85,8 @@ const Login = () => {
                         Забыли пароль?
                     </Link>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

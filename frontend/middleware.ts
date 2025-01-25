@@ -8,7 +8,9 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/dashboard") && !accessToken) {
-    return NextResponse.redirect(new URL("/auth/login", request.url));
+    let url = new URL("/auth/login", request.url);
+    url.searchParams.set("pathname", pathname);
+    return NextResponse.redirect(url);
   }
 
   return NextResponse.next();

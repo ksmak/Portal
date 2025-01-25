@@ -11,6 +11,7 @@ from auths.views import (
     DepartmentView,
     ManagementView,
     DivisionView,
+    BirthUserView,
 )
 from services.views import ServiceView
 
@@ -20,6 +21,7 @@ router.register("services", ServiceView, basename="services")
 router.register("departments", DepartmentView, basename="deparments")
 router.register("managements", ManagementView, basename="managements")
 router.register("divisions", DivisionView, basename="divisions")
+router.register("birth_users", BirthUserView, basename="birth_users")
 
 urlpatterns = [
     path("admin/", admin.site.urls),

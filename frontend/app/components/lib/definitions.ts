@@ -30,3 +30,18 @@ export type UserType = {
   date_of_birth: string;
   phone: number;
 };
+
+export const ListOfMonths = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
