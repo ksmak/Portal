@@ -3,14 +3,29 @@
 import { Tabs } from "flowbite-react";
 import { ServiceType } from "../lib/definitions";
 import Service from "./Service";
+import { CustomFlowbiteTheme } from "flowbite-react";
 
 export default function ServiceList({
     services
 }: {
     services: ServiceType[]
 }) {
+    const themeTabs: CustomFlowbiteTheme["tabs"] = {
+        "tablist": {
+            "tabitem": {
+                "base": "flex item-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus-ouline-none disabled:cursor-not-allowed disabled: text-gray-400 disabled:dark:text-gray-500",
+                "variant": {
+                    "default": {
+                        "active": {
+                            "on": "bg-primary text-white border-none"
+                        }
+                    }
+                }
+            }
+        }
+    }
     return (
-        <Tabs aria-label="Default tabs" variant="underline" className="self-center">
+        <Tabs theme={themeTabs} aria-label="Default tabs" variant="default" className="self-center">
             <Tabs.Item
                 key={1}
                 className=""

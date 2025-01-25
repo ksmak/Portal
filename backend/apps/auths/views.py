@@ -66,7 +66,7 @@ class ManagementView(viewsets.ReadOnlyModelViewSet):
 
 
 class DivisionView(viewsets.ReadOnlyModelViewSet):
-    """Management view."""
+    """Division view."""
 
     queryset = Division.objects.all()
     permission_classes = [permissions.AllowAny]

@@ -71,3 +71,10 @@ class DivisionSerializer(serializers.ModelSerializer):
             "name_kk",
             "name_ru",
         ]
+
+
+class BirthUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ["last_name", "first_name", "middle_name", "date_of_birth"]

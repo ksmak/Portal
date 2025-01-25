@@ -1,6 +1,8 @@
-.env
+/backend/.env
 /backend/venv/
 /backend/media/
+/backend/apps/auths/migrations/
+/backend/apps/services/migrations/
 __pycache__
 /frontend/node_modules/
 /frontend/.next/
