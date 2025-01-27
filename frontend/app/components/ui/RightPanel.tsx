@@ -4,8 +4,11 @@ import { fetcher_no_auth } from "@/app/fetcher";
 import { CustomFlowbiteTheme, Datepicker } from "flowbite-react";
 import useSWR from "swr";
 import { ListOfMonths, UserType } from "../lib/definitions";
+import { useLocale } from "next-intl";
 
 export default function RightPanel() {
+    const locale = useLocale()
+
     const { data: users_born_today } = useSWR("/api/birth_users/?q=today", fetcher_no_auth);
 
     let currentMonth = ListOfMonths[new Date().getMonth()];
@@ -39,14 +42,11 @@ export default function RightPanel() {
     return (
         <div className="w-full flex flex-col gap-3">
             <Datepicker
+                className="self-center"
                 theme={customTheme}
-                language="ru"
+                language={locale}
                 defaultValue={new Date()}
                 inline
-                className="self-center"
-                labelTodayButton="Сегодня"
-                labelClearButton=""
-                disabled={true}
             />
             <div className="px-5 text-sm text-primary">
                 <div>

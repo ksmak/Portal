@@ -11,12 +11,24 @@ class Service(models.Model):
     )
     order_num = models.PositiveIntegerField(verbose_name="порядковый номер")
     name = models.CharField(verbose_name="наименование", max_length=200)
+    name_ru = models.CharField(
+        verbose_name="наименование (на русском языке)",
+        max_length=200,
+        blank=True,
+        null=True,
+    )
+    name_kk = models.CharField(
+        verbose_name="наименование (на казахском языке)",
+        max_length=200,
+        blank=True,
+        null=True,
+    )
     category = models.IntegerField(verbose_name="категория", choices=CATEGORIES)
     image = models.ImageField(verbose_name="логотип", upload_to="logotypes/")
     target = models.URLField(verbose_name="ссылка")
 
     def __str__(self):
-        return f"{self.CATEGORIES[self.category - 1][1]}: {self.name}"
+        return f"{self.CATEGORIES[self.category - 1][1]}: {self.name_ru}"
 
     class Meta:
         ordering = ["category", "order_num"]

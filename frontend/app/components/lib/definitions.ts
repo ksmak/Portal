@@ -1,6 +1,7 @@
 export type ServiceType = {
   id: number;
-  name: string;
+  name_ru: string;
+  name_kk: string;
   category: number;
   image: string;
   target: string;
@@ -45,3 +46,10 @@ export const ListOfMonths = [
   "November",
   "December",
 ];
+
+export type QuoteType = {
+  text_ru: string;
+  text_kk: string;
+  author_ru: string;
+  author_kk: string;
+}

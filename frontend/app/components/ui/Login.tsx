@@ -32,7 +32,7 @@ const Login = () => {
             .json((json) => {
                 storeToken(json.access, "access");
                 storeToken(json.refresh, "refresh");
-                router.replace(pathname);
+                router.push(pathname);
             })
             .catch((err) => {
                 setError("root", { type: "manual", message: "Ошибка! Неверный логин или пароль." });
