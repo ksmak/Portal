@@ -7,7 +7,7 @@ export default function FooterComponent() {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <Footer className="hover:cursor-pointer bg-gray-50 p-1" container onClick={() => setIsOpen(!isOpen)}>
+        <Footer className="hover:cursor-pointer bg-gray-50 p-1 text-sm" container onClick={() => setIsOpen(!isOpen)}>
             <div className="w-full">
                 <div className="w-full grid grid-cols-2 justify-items-center">
                     <div>
@@ -23,9 +23,16 @@ export default function FooterComponent() {
                         {isOpen && <div className="flex flex-col gap-2 text-gray-500">
                             <span>УИиС ДП Карагандинской области</span>
                             <span>г.Караганда, улица Ерубаева 37</span>
-                            <span>8(7212)-42-90-66</span>
-                            <span>8(7212)-42-92-83</span>
-                            <span>8(7212)-42-92-63</span>
+                            <div>
+                                <div className="flex justify-between gap-2">
+                                    <div>отдел связи:</div>
+                                    <div>8(7212)-42-90-00</div>
+                                </div>
+                                <div className="flex justify-between gap-2">
+                                    <div>отдел компьютеризации:</div>
+                                    <div>8(7212)-42-90-66</div>
+                                </div>
+                            </div>
                         </div>}
                     </div>
                 </div>

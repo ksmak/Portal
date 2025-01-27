@@ -1,9 +1,10 @@
 import { Locale } from "@/i18n/config"
 import { setUserLocale } from "../lib/locale"
 import { useLocale } from "next-intl"
-import { Dropdown } from "flowbite-react"
+import { Dropdown, TabItem } from "flowbite-react"
 import { useTransition } from 'react';
 import { CustomFlowbiteTheme } from "flowbite-react";
+import { title } from "process";
 
 export default function Language() {
     const [isPending, startTransition] = useTransition();
@@ -11,8 +12,14 @@ export default function Language() {
     const locale = useLocale()
 
     const langs = [
-        "ru",
-        "kk"
+        {
+            title: "рус",
+            label: "ru"
+        },
+        {
+            title: "қаз",
+            label: "kk"
+        }
     ]
 
     function onChange(value: string) {
@@ -28,12 +35,15 @@ export default function Language() {
 
     return (
         <div>
-            <Dropdown theme={dropdownTheme} renderTrigger={() => <div className="text-sm uppercase font-bold text-white border border-white p-2 rounded-lg hover:cursor-pointer">{locale}</div>}>
-                {langs.filter(item => item != locale).map(item => (
+            <Dropdown theme={dropdownTheme} renderTrigger={() =>
+                <div className="text-sm uppercase font-bold text-white border border-white p-2 rounded-lg hover:cursor-pointer">
+                    {langs.filter(item => item.label === locale)[0].title}
+                </div>}>
+                {langs.filter(item => item.label != locale).map(item => (
                     <Dropdown.Item
-                        key={item}
-                        onClick={() => onChange(item)}>
-                        {item}
+                        key={item.label}
+                        onClick={() => onChange(item.label)}>
+                        {item.title}
                     </Dropdown.Item>
                 ))}
             </Dropdown>

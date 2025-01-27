@@ -50,7 +50,7 @@ export default function RightPanel() {
             />
             <div className="px-5 text-sm text-primary">
                 <div>
-                    {users_born_today && (
+                    {users_born_today?.length > 0 && (
                         <div key="born_1">
                             <h2>Сегодня день рождения у следующих сотрудников:</h2>
                             {users_born_today.map((item: UserType) => (
@@ -59,7 +59,7 @@ export default function RightPanel() {
                         </div>)}
                 </div>
                 <div>
-                    {users_born_this_month && (
+                    {users_born_this_month?.length > 0 && (
                         <div key="born_2">
                             <h2>В этом месяце у следующих сотрудников:</h2>
                             {users_born_this_month.map((item: UserType) => (
