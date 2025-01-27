@@ -18,17 +18,19 @@ class ServiceSerializerTest(TestCase):
     def test_service_serializer(self):
         expected_data = {
             "id": ANY,
-            "name": "тестовый сервис",
+            "name_ru": "тестовый сервис",
+            "name_kk": "тестілік қызмет",
             "category": 1,
             "image": ANY,
-            "target": "https://example.com"
+            "target": "https://example.com",
         }
 
         service = Service.objects.create(
             order_num=1,
-            name="тестовый сервис",
+            name_ru="тестовый сервис",
+            name_kk="тестілік қызмет",
             category=1,
-            target="https://example.com"
+            target="https://example.com",
         )
         with tempfile.TemporaryFile() as fp:
             service.image = SimpleUploadedFile(
@@ -49,9 +51,10 @@ class ServiceViewTest(test.APITestCase):
     def setUp(self):
         self.service1 = Service.objects.create(
             order_num=1,
-            name="тестовый сервис 1",
+            name_ru="тестовый сервис 1",
+            name_kk="тестілік қызмет 1",
             category=1,
-            target="https://example1.com"
+            target="https://example1.com",
         )
 
         with tempfile.TemporaryFile() as fp:
@@ -64,9 +67,10 @@ class ServiceViewTest(test.APITestCase):
 
         self.service2 = Service.objects.create(
             order_num=1,
-            name="тестовый сервис 2",
+            name_ru="тестовый сервис 2",
+            name_kk="тестілік қызмет 2",
             category=2,
-            target="https://example2.com"
+            target="https://example2.com",
         )
 
         with tempfile.TemporaryFile() as fp:
@@ -81,14 +85,16 @@ class ServiceViewTest(test.APITestCase):
         expected_data = [
             {
                 "id": ANY,
-                "name": "тестовый сервис 1",
+                "name_ru": "тестовый сервис 1",
+                "name_kk": "тестілік қызмет 1",
                 "category": 1,
                 "image": ANY,
                 "target": "https://example1.com",
             },
             {
                 "id": ANY,
-                "name": "тестовый сервис 2",
+                "name_ru": "тестовый сервис 2",
+                "name_kk": "тестілік қызмет 2",
                 "category": 2,
                 "image": ANY,
                 "target": "https://example2.com",
