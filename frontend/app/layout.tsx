@@ -23,8 +23,8 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   const quoteObj: QuoteType = {
-    text_ru: process.env.QUOTE_TEXT_RU ? `\" ${process.env.QUOTE_TEXT} \"` : "",
-    text_kk: process.env.QUOTE_TEXT_KK ? `\" ${process.env.QUOTE_TEXT} \"` : "",
+    text_ru: process.env.QUOTE_TEXT_RU ? `\" ${process.env.QUOTE_TEXT_RU} \"` : "",
+    text_kk: process.env.QUOTE_TEXT_KK ? `\" ${process.env.QUOTE_TEXT_KK} \"` : "",
     author_ru: process.env.QUOTE_AUTHOR_RU || "",
     author_kk: process.env.QUOTE_AUTHOR_KK || "",
   }
