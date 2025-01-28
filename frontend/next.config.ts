@@ -14,6 +14,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+        pathname: "/media/**",
+        search: "",
+      },
+      {
+        protocol: "http", 
         hostname: "10.145.104.32",
         port: "8000",
         pathname: "/media/**",

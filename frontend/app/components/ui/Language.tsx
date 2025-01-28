@@ -36,7 +36,7 @@ export default function Language() {
     return (
         <div>
             <Dropdown theme={dropdownTheme} renderTrigger={() =>
-                <div className="text-sm uppercase font-bold text-white border border-white p-2 rounded-lg hover:cursor-pointer">
+                <div className="text-xs uppercase font-bold text-white border border-white p-2 rounded-lg hover:cursor-pointer">
                     {langs.filter(item => item.label === locale)[0].title}
                 </div>}>
                 {langs.filter(item => item.label != locale).map(item => (

@@ -1,12 +1,13 @@
 import wretch, { Wretch, WretchError } from "wretch";
 import { AuthActions } from "@/app/components/lib/utils";
+import { API_HOST } from "./components/lib/definitions";
 
 // Extract necessary functions from the AuthActions utility.
 const { handleJWTRefresh, storeToken, getToken, removeTokens } = AuthActions();
 
 const api = () => {
   return (
-    wretch("http://10.145.104.32:8000")
+    wretch(API_HOST)
       // Initialize authentication with the access token.
       .auth(`Bearer ${getToken("access")}`)
       // Catch 401 errors to refresh the token and retry the request.
@@ -42,5 +43,5 @@ export const fetcher = (url: string): Promise<any> => {
 };
 
 export const fetcher_no_auth = (url: string): Promise<any> => {
-  return wretch("http://10.145.104.32:8000").get(url).json();
+  return wretch(API_HOST).get(url).json();
 };

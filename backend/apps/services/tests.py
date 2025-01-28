@@ -107,4 +107,4 @@ class ServiceViewTest(test.APITestCase):
         self.assertListEqual(expected_data, response.data)
 
     def tearDown(self):
-        shutil.rmtree("media/")
+        shutil.rmtree("media/logotypes/")

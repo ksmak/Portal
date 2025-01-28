@@ -1,3 +1,5 @@
+export const API_HOST = "http://localhost:8000"
+
 export type ServiceType = {
   id: number;
   name_ru: string;

@@ -104,7 +104,7 @@ class BirthUserView(viewsets.ReadOnlyModelViewSet):
 
         elif q in self.list_of_months:
             return User.objects.filter(
-                date_of_birth__month=self.list_of_months.index(q)
+                date_of_birth__month=self.list_of_months.index(q) + 1
             )
 
         return []

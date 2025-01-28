@@ -14,10 +14,12 @@ from auths.views import (
     BirthUserView,
 )
 from services.views import ServiceView
+from stats.views import StatReportView
 
 router = routers.DefaultRouter()
 router.register("users", CustomUserView, basename="users")
 router.register("services", ServiceView, basename="services")
+router.register("statreports", StatReportView, basename="statreports")
 router.register("departments", DepartmentView, basename="deparments")
 router.register("managements", ManagementView, basename="managements")
 router.register("divisions", DivisionView, basename="divisions")

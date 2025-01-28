@@ -5,9 +5,9 @@ class Service(models.Model):
     """Custom service model."""
 
     CATEGORIES = (
-        (1, "Основные сервисы МВД и ГП РК"),
-        (2, "Сервисы ДП Карагандинской области"),
-        (3, "Сервисы других государственных органов"),
+        (1, "Cервисы МВД и ГП РК"),
+        (2, "Сервисы государственных органов"),
+        (3, "Мои ссылки"),
     )
     order_num = models.PositiveIntegerField(verbose_name="порядковый номер")
     name_ru = models.CharField(

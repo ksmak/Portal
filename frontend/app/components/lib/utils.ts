@@ -1,8 +1,9 @@
 import wretch from "wretch";
 import Cookies from "js-cookie";
+import { API_HOST } from "./definitions";
 
 // Base API setup for making HTTP requests
-const api = wretch("http://10.145.104.32:8000").accept("application/json");
+const api = wretch(API_HOST).accept("application/json");
 
 /**
  * Stores a token in cookies.

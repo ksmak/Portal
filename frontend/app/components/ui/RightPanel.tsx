@@ -1,19 +1,10 @@
 'use client'
 
-import { fetcher_no_auth } from "@/app/fetcher";
 import { CustomFlowbiteTheme, Datepicker } from "flowbite-react";
-import useSWR from "swr";
-import { ListOfMonths, UserType } from "../lib/definitions";
 import { useLocale } from "next-intl";
 
 export default function RightPanel() {
     const locale = useLocale()
-
-    const { data: users_born_today } = useSWR("/api/birth_users/?q=today", fetcher_no_auth);
-
-    let currentMonth = ListOfMonths[new Date().getMonth()];
-
-    const { data: users_born_this_month } = useSWR(`/api/birth_users/?q=${currentMonth}`)
 
     const customTheme: CustomFlowbiteTheme["datepicker"] = {
         popup: {
@@ -48,26 +39,7 @@ export default function RightPanel() {
                 defaultValue={new Date()}
                 inline
             />
-            <div className="px-5 text-sm text-primary">
-                <div>
-                    {users_born_today?.length > 0 && (
-                        <div key="born_1">
-                            <h2>Сегодня день рождения у следующих сотрудников:</h2>
-                            {users_born_today.map((item: UserType) => (
-                                <div key={item.email} className="underline">{item.last_name} {item.first_name} {item.middle_name}</div>
-                            ))}
-                        </div>)}
-                </div>
-                <div>
-                    {users_born_this_month?.length > 0 && (
-                        <div key="born_2">
-                            <h2>В этом месяце у следующих сотрудников:</h2>
-                            {users_born_this_month.map((item: UserType) => (
-                                <div key={item.email} className="underline">{item.last_name} {item.first_name} {item.middle_name}</div>
-                            ))}
-                        </div>)}
-                </div>
-            </div>
+
         </div>
     )
 }

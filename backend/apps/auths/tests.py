@@ -216,7 +216,7 @@ class UserViewTest(test.APITestCase):
         ]
 
         response = self.client.get(
-            f"/api/birth_users/?q={list_of_months[date.today().month]}"
+            f"/api/birth_users/?q={list_of_months[date.today().month - 1]}"
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

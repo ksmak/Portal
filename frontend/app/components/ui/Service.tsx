@@ -23,7 +23,7 @@ export default function Service({
                 renderImage={() => <Image width={70} height={50} src={service.image} alt="logo" />}
                 horizontal>
                 <div
-                    className="text-primary font-medium"
+                    className="text-primary font-medium text-sm"
                 >{service[`name_${locale}` as keyof typeof service]}</div>
             </Card>
         </Link>
