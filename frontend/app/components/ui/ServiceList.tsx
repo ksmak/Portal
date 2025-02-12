@@ -1,22 +1,26 @@
 'use client'
 
-import { Tabs } from "flowbite-react";
-import { ServiceType } from "../lib/definitions";
-import Service from "./Service";
-import { CustomFlowbiteTheme, TabsRef } from "flowbite-react";
-import useSWR from "swr";
-import { fetcher_no_auth } from "@/app/fetcher";
-import { useLocale } from "next-intl";
-import { useEffect, useRef, useState } from 'react';
+import { Tabs } from "flowbite-react"
+import { ServiceType } from "../lib/definitions"
+import Service from "./Service"
+import { CustomFlowbiteTheme, TabsRef } from "flowbite-react"
+import useSWR from "swr"
+import { fetcher_no_auth } from "@/app/fetcher"
+import { useLocale } from "next-intl"
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
-export default function ServiceList() {
-    const locale = useLocale();
+export default function ServiceList({
+    setActiveTab,
+}: {
+    setActiveTab: Dispatch<SetStateAction<number>>,
+}) {
+    const locale = useLocale()
 
-    const { data: services } = useSWR("/api/services/", fetcher_no_auth);
+    const { data: services } = useSWR("/api/services/", fetcher_no_auth)
 
-    const tabsRef = useRef<TabsRef>(null);
+    const tabsRef = useRef<TabsRef>(null)
 
-    const [activeTab, setActiveTab] = useState(0);
+    const [favorites, setFavorites] = useState<ServiceType[]>([])
 
     const themeTabs: CustomFlowbiteTheme["tabs"] = {
         "tabitemcontainer": {
@@ -56,28 +60,38 @@ export default function ServiceList() {
     ]
 
     useEffect(() => {
+        let favorites = JSON.parse(localStorage.getItem("favorites") || "[]")
+        setFavorites(favorites)
         tabsRef.current?.setActiveTab(-1)
     }, [])
 
     return (
-        <div className="relative">
-            <Tabs className="self-center" theme={themeTabs} variant="fullWidth" ref={tabsRef} onActiveTabChange={(tab) => setActiveTab(tab)}>
-                {categories.map(category => (
-                    <Tabs.Item
-                        key={category.id}
-                        title={category[`title_${locale}` as keyof typeof category]}
-                    >
-                        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 flex-wrap">
-                            {services?.filter((item: ServiceType) => item.category === category.id).map((item: ServiceType) => (
-                                <Service key={item.id} service={item} />
+        <Tabs className="self-center" theme={themeTabs} variant="fullWidth" ref={tabsRef} onActiveTabChange={(tab) => setActiveTab(tab)}>
+            {categories.map(category => (
+                <Tabs.Item
+                    key={category.id}
+                    title={category[`title_${locale}` as keyof typeof category]}
+                >
+                    <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 flex-wrap">
+                        {category.id === 3
+                            ? favorites?.map((item: ServiceType) =>
+                                <Service
+                                    key={item.id}
+                                    service={item}
+                                    setFavorites={setFavorites}
+                                    isFavorite={true}
+                                />)
+                            : services?.filter((item: ServiceType) => item.category === category.id).map((item: ServiceType) => (
+                                <Service
+                                    key={item.id}
+                                    service={item}
+                                    setFavorites={setFavorites}
+                                    isFavorite={false}
+                                />
                             ))}
-                        </div>
-                    </Tabs.Item>
-                ))}
-            </Tabs>
-            {activeTab === -1 && <div className="absolute top-11 border rounded-md p-2 w-full h-[40rem] overflow-y-auto">
-                111
-            </div>}
-        </div>
-    );
+                    </div>
+                </Tabs.Item>
+            ))}
+        </Tabs>
+    )
 }

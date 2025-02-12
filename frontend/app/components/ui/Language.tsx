@@ -1,10 +1,9 @@
 import { Locale } from "@/i18n/config"
 import { setUserLocale } from "../lib/locale"
 import { useLocale } from "next-intl"
-import { Dropdown, TabItem } from "flowbite-react"
+import { Dropdown } from "flowbite-react"
 import { useTransition } from 'react';
 import { CustomFlowbiteTheme } from "flowbite-react";
-import { title } from "process";
 
 export default function Language() {
     const [isPending, startTransition] = useTransition();
