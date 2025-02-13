@@ -1,17 +1,22 @@
 'use client'
 
-import { UserType } from "../lib/definitions"
+import { useLocale } from "next-intl"
+import { ContactType, DictType } from "../lib/definitions"
 
 export default function Contact({
-    user
+    contact,
+    jobs,
 }: {
-    user: UserType
+    contact: ContactType,
+    jobs: DictType[] | undefined,
 }) {
+    const locale = useLocale()
+
     return (
-        <div className="p-2 font-medium text-gray-700 flex  border-t border-b">
-            <span className="w-1/3">{user.last_name} {user.first_name} {user.middle_name}</span>
-            <span className="w-1/3">{user.job}</span>
-            <span className="w-1/3">{user.phone}</span>
+        <div className="p-2 font-medium text-gray-700 flex  border-t">
+            <span className="w-1/3">{contact.last_name} {contact.first_name} {contact.middle_name}</span>
+            <span className="w-1/3">{jobs?.find((item: DictType) => item.id === contact.job)[`name_${locale}`]}</span>
+            <span className="w-1/3">{contact.phone}</span>
         </div>
     )
 }

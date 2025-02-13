@@ -1,19 +1,19 @@
 'use client'
-
-import { useLocale } from "next-intl"
-import { QuoteType } from "../lib/definitions"
+import { lobster } from "@/app/fonts"
+import { WeatherType } from "../lib/definitions"
 
 export default function Quote({
-    quoteObj
+    text,
+    author,
 }: {
-    quoteObj: QuoteType
+    text: string,
+    author: string,
 }) {
-    const locale = useLocale()
 
     return (
-        <div className="mt-4 self-end px-10 text-primary text-end text-sm">
-            <div>{quoteObj[`text_${locale}` as keyof typeof quoteObj]}</div>
-            <div>{quoteObj[`author_${locale}` as keyof typeof quoteObj]}</div>
+        <div className={`${lobster.className} text-primary text-sm text-end`}>
+            <div>{text}</div>
+            <div>{author}</div>
         </div>
     )
 }

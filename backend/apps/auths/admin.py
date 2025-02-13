@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Department, Management, Division, CustomUser
+from .models import CustomUser
 
 
 class CustomUserAdmin(UserAdmin):
@@ -37,13 +37,6 @@ class CustomUserAdmin(UserAdmin):
                     "last_name",
                     "first_name",
                     "middle_name",
-                    "date_of_birth",
-                    "department",
-                    "management",
-                    "division",
-                    "job",
-                    "rank",
-                    "phone",
                     "password",
                 ],
             },
@@ -92,7 +85,4 @@ class CustomUserAdmin(UserAdmin):
     ]
 
 
-admin.site.register(Department)
-admin.site.register(Management)
-admin.site.register(Division)
 admin.site.register(CustomUser, CustomUserAdmin)

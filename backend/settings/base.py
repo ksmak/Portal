@@ -33,6 +33,8 @@ PROJECT_APPS = [
     "auths",
     "services",
     "stats",
+    "configs",
+    "contacts",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
