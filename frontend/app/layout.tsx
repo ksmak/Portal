@@ -34,8 +34,8 @@ export default async function RootLayout({
           <div className="mt-4 px-10 flex justify-between">
             <WeatherPanel weatherData={cfg[0].weather} />
             <Quote
-              text={cfg[0][`quote_text_${locale}` as keyof typeof cfg[0]] || ""}
-              author={cfg[0][`quote_author_${locale}` as keyof typeof cfg[0]] || ""}
+              text={String(cfg[0][`quote_text_${locale}` as keyof typeof cfg[0]]) || ""}
+              author={String(cfg[0][`quote_author_${locale}` as keyof typeof cfg[0]]) || ""}
             />
           </div>
           <div className="px-4 grow">
