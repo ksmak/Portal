@@ -35,7 +35,7 @@ export default function ContactList() {
         return division
     }
 
-    const contacts = useFilterContacts(contacts_raw, filter)
+    const contacts = useFilterContacts(contacts_raw || [], filter)
 
     return (
         <div className="mt-5 text-sm">
