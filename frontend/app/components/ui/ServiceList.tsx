@@ -75,19 +75,21 @@ export default function ServiceList({
                     <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 flex-wrap">
                         {category.id === 3
                             ? favorites?.map((item: ServiceType) =>
-                                <Service
-                                    key={item.id}
-                                    service={item}
-                                    setFavorites={setFavorites}
-                                    isFavorite={true}
-                                />)
+                                <div key={item.id}>
+                                    <Service
+                                        service={item}
+                                        setFavorites={setFavorites}
+                                        isFavorite={true}
+                                    />
+                                </div>)
                             : services?.filter((item: ServiceType) => item.category === category.id).map((item: ServiceType) => (
-                                <Service
-                                    key={item.id}
-                                    service={item}
-                                    setFavorites={setFavorites}
-                                    isFavorite={false}
-                                />
+                                <div key={item.id} className="h-20">
+                                    <Service
+                                        service={item}
+                                        setFavorites={setFavorites}
+                                        isFavorite={false}
+                                    />
+                                </div>
                             ))}
                     </div>
                 </Tabs.Item>

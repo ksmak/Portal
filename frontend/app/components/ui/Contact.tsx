@@ -17,7 +17,7 @@ export default function Contact({
         let job = jobs?.find(item => item.id === contact.job)
 
         if (job) {
-            jobName = String([`name_${locale}` as keyof typeof job])
+            jobName = String(job[`name_${locale}` as keyof typeof job])
         }
 
         return jobName
